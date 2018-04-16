@@ -1,0 +1,42 @@
+const mongoose = require('mongoose');
+
+const config = require('../config/db'); 
+
+const ProductSchema = mongoose.Schema({
+  name:{
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  category: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  brand: {
+    type: String,
+    required: true
+  }
+});
+
+const product = module.exports = mongoose.model('products', ProductSchema);
+
+module.exports.getProdById = function(id, cb) {
+  product.findById(id, cb);
+}
+
+module.exports.addProduct = function(newProduct, cb) {
+  newProduct.save(cb);
+}
+
+module.exports.getProductbyname = function(name, cb) {
+  const query= {name: name}
+  product.findOne(query, cb);
+}
+
