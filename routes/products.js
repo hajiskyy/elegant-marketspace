@@ -17,9 +17,9 @@ router.post('/addproduct', (req, res, next) => {
 
   product.addProduct(newProduct, (err, prod) =>{
     if(err) {
-      res.json({success: false, msg: 'Failed to register'});
+      res.send({success: false, msg: 'Failed to register'});
     } else {
-      res.json({success: true, msg: 'Product added'})
+      res.send({success: true, msg: 'Product added'})
     }
   });
 });
@@ -28,7 +28,7 @@ router.post('/addproduct', (req, res, next) => {
 router.get('/getproducts',(req, res) => {
   product.getProducts((err, products) => {
     if(err) throw err;
-    res.json(products);
+    res.json({success: true,products});
   })
 })
 

@@ -18,9 +18,9 @@ router.post('/addbrand', (req, res, next) => {
 
   brand.addBrand(newBrand, (err, brand) => {
     if(err) {
-      res.json({success: false, msg: 'Failed Add Brand'});
+      res.send({success: false, msg: 'Failed Add Brand'});
     } else {
-      res.json({success: true, msg: 'Brand added'})
+      res.send({success: true, msg: 'Brand added'})
     }
   });
 });
@@ -29,7 +29,7 @@ router.post('/addbrand', (req, res, next) => {
 router.get('/getbrands', (req, res) => {
   brand.getBrands((err, brands) => {
     if (err) throw err;
-    res.json(brands)
+    res.json({success: true, brands})
   });
 });
 
