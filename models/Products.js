@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const config = require('../config/db'); 
 
 const ProductSchema = mongoose.Schema({
@@ -22,6 +21,13 @@ const ProductSchema = mongoose.Schema({
   brand: {
     type: String,
     required: true
+  },
+  availability: {
+    type: Boolean,
+    required: true
+  },
+  discount: {
+    type: Number
   }
 });
 

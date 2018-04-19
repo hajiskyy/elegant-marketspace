@@ -10,14 +10,16 @@ router.post('/addproduct', (req, res, next) => {
     description:req.body.description,
     category: req.body.category,
     price: req.body.price,
-    brand: req.body.brand
+    brand: req.body.brand,
+    availability: req.body.availability,
+    discount: req.body.discount
   });
 
   product.addProduct(newProduct, (err, prod) =>{
     if(err) {
       res.json({success: false, msg: 'Failed to register'});
     } else {
-      res.json({success: true, msg: 'Products added'})
+      res.json({success: true, msg: 'Product added'})
     }
   });
 });
