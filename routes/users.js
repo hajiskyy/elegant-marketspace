@@ -19,4 +19,21 @@ router.post('/register', (req, res, next) => {
   });
 });
 
+router.post('/login', (req, res, next) => {
+  let email = req.body.email;
+  let password = req.body.password;
+
+  user.getUserbyEmail(email,(err, user) => {
+    if(err) throw err;
+    if(!user){
+      res.send({success: false, msg: "user not found"});
+    }
+    if(user.password === password) {
+      res.json({success: true, user});
+    } else {
+      res.send({success: false, msg: "Wrong Password"})
+    }
+  });
+})
+
 module.exports = router;

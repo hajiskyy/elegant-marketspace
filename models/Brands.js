@@ -50,3 +50,7 @@ module.exports.getBrandByName = function(name, cb){
 module.exports.addBrand = function(newBrand, cb){
   newBrand.save(cb);
 }
+
+module.exports.getBrands = function(cb){
+  brand.find({},cb);
+}

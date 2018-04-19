@@ -24,4 +24,12 @@ router.post('/addproduct', (req, res, next) => {
   });
 });
 
+// Get products
+router.get('/getproducts',(req, res) => {
+  product.getProducts((err, products) => {
+    if(err) throw err;
+    res.json(products);
+  })
+})
+
 module.exports = router;

@@ -46,3 +46,6 @@ module.exports.getProductbyname = function(name, cb) {
   product.findOne(query, cb);
 }
 
+module.exports.getProducts = function(cb){
+  product.find({},cb);
+}

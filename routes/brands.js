@@ -25,4 +25,12 @@ router.post('/addbrand', (req, res, next) => {
   });
 });
 
+// Get brands
+router.get('/getbrands', (req, res) => {
+  brand.getBrands((err, brands) => {
+    if (err) throw err;
+    res.json(brands)
+  });
+});
+
 module.exports = router;
