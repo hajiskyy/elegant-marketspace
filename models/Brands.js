@@ -33,6 +33,10 @@ const BrandSchema = mongoose.Schema({
   url: {
     type: String,
     required: true
+  },
+  imgUrl: {
+    type: String,
+    required: true
   }
 })
 

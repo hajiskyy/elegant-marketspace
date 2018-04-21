@@ -8,7 +8,8 @@ router.post('/register', (req, res, next) => {
     FirstName: req.body.FirstName,
     LastName: req.body.LastName,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    hasBrand: false
   });
   user.addUser(NewUser, (err, user) => {
     if(err) {

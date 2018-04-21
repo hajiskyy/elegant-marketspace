@@ -17,6 +17,10 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  hasBrand: {
+    type: Boolean,
+    required: true
   }
 });
 

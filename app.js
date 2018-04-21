@@ -9,6 +9,7 @@ const config = require('./config/db');
 const products = require('./routes/products');
 const brands = require('./routes/brands');
 const users = require('./routes/users');
+const images = require('./routes/images');
 
 // Express middle ware
 const app = express();
@@ -51,6 +52,9 @@ app.use('/brand', brands)
 
 // users route
 app.use('/user', users);
+
+// images route
+app.use('/image', images)
 
 
 
