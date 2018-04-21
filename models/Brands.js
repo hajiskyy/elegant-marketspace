@@ -30,6 +30,10 @@ const BrandSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  phone: {
+    type: String,
+    required: true
+  },
   url: {
     type: String,
     required: true

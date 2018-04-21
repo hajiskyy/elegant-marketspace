@@ -16,6 +16,7 @@ router.post('/addbrand', upload.single('file'), (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     address: req.body.address,
+    phone: req.body.phone,
     url: req.body.url,
     imgUrl: "http://localhost:5000/image/" + req.file.filename
   });
