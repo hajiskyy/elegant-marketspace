@@ -4,35 +4,47 @@ const user = require('../models/User');
 const config = require('../config/db');
 
 router.post('/register', (req, res, next) => {
-  let NewUser = new user ({
-    FirstName: req.body.FirstName,
-    LastName: req.body.LastName,
-    email: req.body.email,
-    password: req.body.password,
-    hasBrand: false
-  });
-  user.addUser(NewUser, (err, user) => {
-    if(err) {
-      res.json({success: false, msg: 'Failed to register'});
+  user.getUserbyEmail(req.body.email, (err, User) => {
+    // check if email already exists    
+    if (User) {
+      if (err) throw err;
+      res.send({ success: false, msg: 'Account Already Exists' });
     } else {
-      res.json({success: true, msg: 'User registered'});
+      // if email doesnt exist
+      let NewUser = new user({
+        FirstName: req.body.FirstName,
+        LastName: req.body.LastName,
+        email: req.body.email,
+        password: req.body.password,
+        hasBrand: false
+      });
+      // add New user
+      user.addUser(NewUser, (err, user) => {
+        if (err) {
+          res.send({ success: false, msg: 'Failed to register' });
+        } else {
+          res.send({ success: true, msg: 'User registered' });
+        }
+      });
     }
   });
+
+
 });
 
 router.post('/login', (req, res, next) => {
   let email = req.body.email;
   let password = req.body.password;
 
-  user.getUserbyEmail(email,(err, user) => {
-    if(err) throw err;
-    if(!user){
-      res.send({success: false, msg: "user not found"});
+  user.getUserbyEmail(email, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      res.send({ success: false, msg: "user doesnt exist" });
     }
-    if(user.password === password) {
-      res.json({success: true, user});
+    if (user.password === password) {
+      res.json({ success: true, user });
     } else {
-      res.send({success: false, msg: "Wrong Password"})
+      res.send({ success: false, msg: "Wrong Password" })
     }
   });
 })
