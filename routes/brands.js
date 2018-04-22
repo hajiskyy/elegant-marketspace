@@ -30,13 +30,13 @@ router.post('/addbrand', upload.single('file'), (req, res, next) => {
 
   brand.addBrand(newBrand, (err, brand) => {
     if (err) {
-      res.send({ success: false, msg: 'Failed to register Brand' });
+      res.json({ success: false, msg: 'Failed to register Brand' });
     } else {
       user.addUser(NewUser, (err, user) => {
         if (err) {
-          res.send({ success: false, msg: 'Failed to register' });
+          res.json({ success: false, msg: 'Failed to register' });
         } else {
-          res.send({ success: true, msg: 'Brand added and Account Created' });
+          res.json({ success: true, msg: 'Brand added and Account Created' });
         }
       });
     }

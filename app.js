@@ -35,7 +35,7 @@ mongoose.connection.on('error', (err) => {
 app.use(cors());
 
 // Bodyparser Middle ware
-app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
