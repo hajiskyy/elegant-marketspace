@@ -32,13 +32,24 @@ router.post('/addbrand', upload.single('file'), (req, res, next) => {
     if (err) {
       res.json({ success: false, msg: 'Failed to register Brand' });
     } else {
-      user.addUser(NewUser, (err, user) => {
-        if (err) {
-          res.json({ success: false, msg: 'Failed to register' });
+      // check if user already exists
+      user.getUserbyEmail(req.body.email, (err, User) => {
+        if(err) throw err;
+        //if account exists
+        if(User) {
+          res.json({ success: false, msg: 'Account Already Exists' });
         } else {
-          res.json({ success: true, msg: 'Brand added and Account Created' });
+          // if not, add user
+          user.addUser(NewUser, (err, user) => {
+            if (err) {
+              res.json({ success: false, msg: 'Failed to register' });
+            } else {
+              res.json({ success: true, msg: 'Brand added and Account Created' });
+            }
+          });
         }
-      });
+      })
+
     }
   });
 });

@@ -5,10 +5,11 @@ const config = require('../config/db');
 
 router.post('/register', (req, res, next) => {
   user.getUserbyEmail(req.body.email, (err, User) => {
+
+    if (err) throw err;
     // check if email already exists    
     if (User) {
-      if (err) throw err;
-      res.send({ success: false, msg: 'Account Already Exists' });
+      res.json({ success: false, msg: 'Account Already Exists' });
     } else {
       // if email doesnt exist
       let NewUser = new user({
@@ -21,9 +22,9 @@ router.post('/register', (req, res, next) => {
       // add New user
       user.addUser(NewUser, (err, user) => {
         if (err) {
-          res.send({ success: false, msg: 'Failed to register' });
+          res.json({ success: false, msg: 'Failed to register' });
         } else {
-          res.send({ success: true, msg: 'User registered' });
+          res.json({ success: true, msg: 'User registered' });
         }
       });
     }
