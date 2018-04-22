@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const config = require('../config/db');
 
 const UserSchema = mongoose.Schema({
+  id: {
+    type: String,
+    required: true
+  },
   FirstName: {
     type: String,
     required: true

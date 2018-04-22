@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const config = require('../config/db'); 
 
 const ProductSchema = mongoose.Schema({
+  id: {
+    type: String,
+    required: true
+  },
   name:{
     type: String,
     required: true
@@ -48,6 +52,11 @@ module.exports.addProduct = function(newProduct, cb) {
 module.exports.getProductbyname = function(name, cb) {
   const query= {name: name}
   product.findOne(query, cb);
+}
+
+module.exports.getProductByCategory = function(category, cb) {
+  const query= {category: category}
+  product.find(query, cb);
 }
 
 module.exports.getProducts = function(cb){

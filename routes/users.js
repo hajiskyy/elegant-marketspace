@@ -13,6 +13,7 @@ router.post('/register', (req, res, next) => {
     } else {
       // if email doesnt exist
       let NewUser = new user({
+        id: new mongoose.Types.ObjectId(),
         FirstName: req.body.FirstName,
         LastName: req.body.LastName,
         email: req.body.email,
@@ -40,13 +41,15 @@ router.post('/login', (req, res, next) => {
   user.getUserbyEmail(email, (err, user) => {
     if (err) throw err;
     if (!user) {
-      res.send({ success: false, msg: "user doesnt exist" });
-    }
-    if (user.password === password) {
-      res.json({ success: true, user });
+      res.json({ success: false, msg: "user doesnt exist" });
     } else {
-      res.send({ success: false, msg: "Wrong Password" })
+      if (user.password === password) {
+        res.json({ success: true, user });
+      } else {
+        res.json({ success: false, msg: "Wrong Password" })
+      }
     }
+ 
   });
 })
 

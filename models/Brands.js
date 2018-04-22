@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const config = require('../config/db');
 
 const BrandSchema = mongoose.Schema({
+  id: {
+    type: String,
+    required: true
+  },
   ownerFirstName: {
     type: String,
     required: true
