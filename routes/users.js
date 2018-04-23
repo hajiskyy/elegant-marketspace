@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../models/User');
-const config = require('../config/db');
 
 router.post('/register', (req, res, next) => {
   user.getUserbyEmail(req.body.email, (err, User) => {
-
     if (err) throw err;
     // check if email already exists    
     if (User) {
@@ -13,7 +11,7 @@ router.post('/register', (req, res, next) => {
     } else {
       // if email doesnt exist
       let NewUser = new user({
-        id: new mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(),
         FirstName: req.body.FirstName,
         LastName: req.body.LastName,
         email: req.body.email,
@@ -49,7 +47,7 @@ router.post('/login', (req, res, next) => {
         res.json({ success: false, msg: "Wrong Password" })
       }
     }
- 
+
   });
 })
 

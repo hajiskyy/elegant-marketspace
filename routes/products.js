@@ -8,7 +8,7 @@ const mongoose = require('mongoose')
 // Add Products 
 router.post('/addproduct', upload.single('file'), (req, res, next) => {
   let newProduct = new product({
-    id: new mongoose.Types.ObjectId(),
+    _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
     description: req.body.description,
     category: req.body.category,
