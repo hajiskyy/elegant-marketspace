@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const config = require('../config/db');
 
 const UserSchema = mongoose.Schema({
-  id: {
+  _id: {
     type: String,
     required: true
   },

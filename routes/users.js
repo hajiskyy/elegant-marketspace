@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../models/User');
+const mongoose = require('mongoose');
+const brand = require('../models/Brands');
 
 router.post('/register', (req, res, next) => {
   user.getUserbyEmail(req.body.email, (err, User) => {
@@ -42,7 +44,14 @@ router.post('/login', (req, res, next) => {
       res.json({ success: false, msg: "user doesnt exist" });
     } else {
       if (user.password === password) {
-        res.json({ success: true, user });
+        if(user.hasBrand){
+          brand.getBrandByEmail(email, (err, brand) => {
+            if(err) throw err;
+            res.json({ success: true, user,brand:brand.brandName });
+          })
+        } else {
+          res.json({ success: true, user });
+        }
       } else {
         res.json({ success: false, msg: "Wrong Password" })
       }

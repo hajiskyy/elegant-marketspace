@@ -4,11 +4,13 @@ const brand = require('../models/Brands');
 const user = require('../models/User');
 const router = express.Router();
 const upload = require('../config/gridFsStorage');
+const mongoose = require('mongoose');
 
 
 // Add brands
 router.post('/addbrand', upload.single('file'), (req, res, next) => {
   let newBrand = new brand({
+    _id: new mongoose.Types.ObjectId(),
     ownerFirstName: req.body.ownerFirstName,
     ownerLastName: req.body.ownerLastName,
     brandName: req.body.brandName,
@@ -21,6 +23,7 @@ router.post('/addbrand', upload.single('file'), (req, res, next) => {
     imgUrl: "http://localhost:5000/image/" + req.file.filename
   });
   let NewUser = new user({
+    _id: new mongoose.Types.ObjectId(),
     FirstName: req.body.ownerFirstName,
     LastName: req.body.ownerLastName,
     email: req.body.email,

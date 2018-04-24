@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const config = require('../config/db');
 
 const BrandSchema = mongoose.Schema({
-  id: {
+  _id: {
     type: String,
     required: true
   },
@@ -19,8 +19,7 @@ const BrandSchema = mongoose.Schema({
     required: true
   },
   description: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
     type: String,
@@ -54,7 +53,12 @@ module.exports.getBrandById = function(id, cb){
   brand.findById(id, cb);
 }
 
-module.exports.getBrandByName = function(name, cb){
+module.exports.getBrandByEmail = function(email, cb){
+  const query = { email: email }
+  brand.findOne(query, cb);
+}
+
+module.exports.getBrandName = function(name, cb){
   const query = { name: name }
   brand.findOne(name, cb);
 }

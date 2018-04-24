@@ -37,20 +37,21 @@ router.get('/getproducts', (req, res) => {
 })
 
 // get products by category
-router.get('/getproducts/:category', (req, res) => {
+router.get('/getproductsCategory/:category', (req, res) => {
   let category = req.params.category;
-  if (category === "") {
-    product.getProducts((err, products) => {
-      if (err) throw err;
-      res.json(products);
-    })
-  } else {
-    product.getProductByCategory(category, (err, product) => {
-      if (err) throw err;
-      res.json(product);
-    });
-  }
+  product.getProductByCategory(category, (err, product) => {
+    if (err) throw err;
+    res.json(product);
+  });
+});
 
+// get products by brand
+router.get('/getproductsBrand/:brand', (req, res) => {
+  let brand = req.params.brand;
+  product.getProductByBrand(brand, (err, product) => {
+    if (err) throw err;
+    res.json(product);
+  });
 });
 
 module.exports = router;
