@@ -18,6 +18,11 @@ const orderSchema = new mongoose.Schema({
   brandName:{
     type: String,
     required: true
+  },
+  date: {
+    type: Date,
+    required: true,
+    default: new Date()
   }
 });
 

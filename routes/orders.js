@@ -7,40 +7,28 @@ const product = require('../models/Products')
 
 
 router.post('/place', (req, res, next) => {
-
-  // Check if products exists
-  product.getProdById(req.body.product, (err, prod) => {
-    if (err) throw err;
-    if (!prod) {
-      res.json({ success: false, msg: 'product does not exist' });
-    } else {
-      let NewOrder = new order({
-        _id: new mongoose.Types.ObjectId(),
-        quantity: req.body.quantity,
-        product: req.body.product,
-        brandName: req.body.brandName
-      });
-
-      order.addOrder(NewOrder, (err, order) => {
-        if (err) {
-          res.json({ success: false, msg: 'Failed to Place Order' });
-        } else {
-          res.json({ success: true, msg: 'Your Order has been placed' });
-        }
-      });
-    }
-  });
-
+  req.body.forEach(products => {
+        let NewOrder = new order({
+          _id: new mongoose.Types.ObjectId(),
+          quantity: products.quantity,
+          product: products.product,
+          brandName: products.brandName
+        });
+        order.addOrder(NewOrder, (err, order) => {
+          if(err) throw err;
+        });
+    }); 
+    res.json({ success: true, msg: 'Your Order has been placed' });
 });
 
 router.get('/getorders/:brandName', (req, res) => {
   let brandName = req.params.brandName;
-    order.getOrderByBrandName(brandName, (err, orders) => {
-      if(err){
-        res.send('No Orders Available');
-      };
-      res.json(orders);
-    });
+  order.getOrderByBrandName(brandName, (err, orders) => {
+    if (err) {
+      res.send('No Orders Available');
+    };
+    res.json(orders);
+  });
 });
 
 router.get('/getorders', (req, res) => {
