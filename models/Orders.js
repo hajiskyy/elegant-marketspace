@@ -15,6 +15,11 @@ const orderSchema = new mongoose.Schema({
     ref: 'products',
     required: true
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
+    required: true
+  },
   brandName:{
     type: String,
     required: true
@@ -33,13 +38,13 @@ module.exports.getOrdersbyId = function(id, cb){
 }
 
 module.exports.getOrders = function(cb){
-  order.find().populate('product','name price discount category').exec(cb);
+  order.find().populate('product','name price discount category').populate('user','email FirstName LastName').exec(cb);
 }
 
 module.exports.getOrderByBrandName = function(brandName,cb){
   const query = {brandName:brandName};
   order.find(query)
-  .populate('product','name price discount category').exec(cb);
+  .populate('product','name price discount category').populate('user','FirstName LastName email').exec(cb);
 }
 
 module.exports.addOrder = function(NewOrder, cb){

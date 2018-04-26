@@ -12,6 +12,7 @@ router.post('/place', (req, res, next) => {
           _id: new mongoose.Types.ObjectId(),
           quantity: products.quantity,
           product: products.product,
+          user: products.user,
           brandName: products.brandName
         });
         order.addOrder(NewOrder, (err, order) => {
