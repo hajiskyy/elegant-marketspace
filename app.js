@@ -11,6 +11,7 @@ const brands = require('./routes/brands');
 const users = require('./routes/users');
 const images = require('./routes/images');
 const orders = require('./routes/orders');
+const ratings = require('./routes/ratings');
 
 // Express middle ware
 const app = express();
@@ -59,6 +60,9 @@ app.use('/image', images);
 
 // orders route
 app.use('/order', orders);
+
+// ratings router
+app.use('/rating', ratings);
 
 
 
