@@ -59,6 +59,11 @@ module.exports.getProductByCategory = function(category, cb) {
   product.find(query, cb);
 }
 
+module.exports.getCategoryofProducts = function(category, brand, cb) {
+  const query= {category: category, brand: brand}
+  product.find(query, cb);
+}
+
 module.exports.getProductByBrand = function(brand, cb) {
   const query = {brand: brand}
   product.find(query, cb);

@@ -54,4 +54,14 @@ router.get('/getproductsBrand/:brand', (req, res) => {
   });
 });
 
+//sort brand products by category
+router.get('/getBrandCategory/:brand/:category', (req, res) => {
+  let brand = req.params.brand;
+  let category = req.params.category;
+    product.getCategoryofProducts(category, brand, (err, prod) => {
+      if(err) throw err;
+      //return sorted products
+      res.json(prod);
+    });
+});
 module.exports = router;
