@@ -16,17 +16,41 @@ router.post('/add', (req, res, next) => {
   // Check if user has posted already
   ratings.productRating(req.body.user, req.body.product, (err, rating) => {
     if (err) throw err;
-    if (rating && req.body.comments === null) {
-      res.json({ success: true, msg: 'Thanks for the feedback' });
+    if(rating) {
+      if (rating.likes > 0) {
+        newRating.likes = 0;
+        ratings.addRating(newRating, (err, addedRating) => {
+          if (err) throw err;
+          res.json({ success: true, msg: 'Thanks for the feedback' });
+        });
+      } else {
+        ratings.addRating(newRating, (err, addedRating) => {
+          if (err) throw err;
+          res.json({ success: true, msg: 'Thanks for the feedback' });
+        });
+      }
     } else {
       ratings.addRating(newRating, (err, addedRating) => {
         if (err) throw err;
         res.json({ success: true, msg: 'Thanks for the feedback' });
       });
     }
-  });
+      
+    });
 
-});
+    // if (rating.likes > 0) {
+    //   res.json({ success: true, msg: 'Thanks for the feedback' });
+    // } else {
+      
+    // }
+    // let newRating = new ratings({
+    //   _id: new mongoose.Types.ObjectId(),
+    //   likes: req.body.likes,
+    //   comments: req.body.comments,
+    //   product: req.body.product,
+    //   user: req.body.user
+    // });
+  });
 
 router.post('/:product', (req, res, next) => {
   let product = req.params.product
