@@ -33,8 +33,18 @@ router.get('/getproducts', (req, res) => {
   product.getProducts((err, products) => {
     if (err) throw err;
     res.json(products);
-  })
-})
+  });
+});
+
+// Get products
+router.get('/getproduct/:id', (req, res) => {
+  let id = req.params.id;
+  product.getProdById(id,(err, prod) => {
+    if (err) throw err;
+    res.json(prod);
+  });
+});
+
 
 // get products by category
 router.get('/getproductsCategory/:category', (req, res) => {
