@@ -14,7 +14,7 @@ router.post('/addproduct', upload.single('file'), (req, res, next) => {
     category: req.body.category,
     price: req.body.price,
     brand: req.body.brand,
-    imageUrl: "http://localhost:5000/image/" + req.file.filename,
+    imageUrl: "http://localhost:8080/image/" + req.file.filename,
     availability: req.body.availability,
     discount: req.body.discount
   });

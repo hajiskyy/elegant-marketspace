@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('./config/db');
+const path = require('path');
 
 
 // routes
@@ -31,7 +32,8 @@ mongoose.connection.on('error', (err) => {
 })
 
 
-
+// port
+const port = process.env.PORT || 8080;
 
 // Cors middleware
 app.use(cors());
@@ -40,11 +42,8 @@ app.use(cors());
 // app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get('/', (req, res) => {
-  res.send('Hello world');
-})
 
 // products route
 app.use('/products', products);
@@ -64,8 +63,16 @@ app.use('/order', orders);
 // ratings router
 app.use('/rating', ratings);
 
+app.get('/', (req, res) => {
+  res.send('invalid endpoint');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 
-app.listen(5000, ()=> {
-  console.log('server started on port 5000');
+
+app.listen(port, ()=> {
+  console.log('server started on port ',port);
 })

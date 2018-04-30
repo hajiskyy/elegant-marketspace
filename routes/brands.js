@@ -20,7 +20,7 @@ router.post('/addbrand', upload.single('file'), (req, res, next) => {
     address: req.body.address,
     phone: req.body.phone,
     url: req.body.url,
-    imgUrl: "http://localhost:5000/image/" + req.file.filename
+    imgUrl: "http://localhost:8080/image/" + req.file.filename
   });
   let NewUser = new user({
     _id: new mongoose.Types.ObjectId(),

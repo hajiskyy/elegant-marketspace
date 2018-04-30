@@ -41,7 +41,7 @@ router.post('/login', (req, res, next) => {
   user.getUserbyEmail(email, (err, user) => {
     if (err) throw err;
     if (!user) {
-      res.json({ success: false, msg: "user doesnt exist" });
+      res.json({ success: false, msg: "account does not exist" });
     } else {
       if (user.password === password) {
         if(user.hasBrand){
