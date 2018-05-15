@@ -565,7 +565,7 @@ module.exports = ""
 /***/ "./src/app/components/cart/cart.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"alert {{className}} fixed-top\">{{msg}}</div>\n  <div class=\"container\" *ngIf=\"cart.length === 0;\">\n    <h5 class=\"text-center my-3\">No Items in cart</h5>\n  </div>\n  <div class=\"container\" *ngIf=\"cart.length > 0;\">\n    <ul class=\"list-unstyled mt-5 mx-3 bg-light\" *ngFor=\"let item of cart\">\n      <li class=\"media\">\n        <img class=\"mr-3\" src=\"{{item.product.imageUrl}}\" style=\"max-width: 13rem;\">\n        <div class=\"media-body\">\n          <h5 class=\"my-3 \">Price:\n            <span class=\"text-success\">{{item.product.price | currency}}</span>\n          </h5>\n          <p class=\"card-text\">{{item.product.description}}</p>\n          <ul class=\"list-group list-group-flush\">\n            <li class=\"list-group-item\">Made By:\n              <a href=\"#\" class=\"card-link\">{{item.product.brand}}</a>\n            </li>\n            <li class=\"list-group-item\">Category :\n              <a href=\"#\" class=\"card-link\">{{item.product.category}}</a>\n            </li>\n            <li class=\"list-group-item\">\n              Quantity:\n              <p>\n                <a href=\"#\" (click)=\"minusQuantity(item,$event)\">\n                  <i class=\"fa fa-minus\"></i>\n                </a>\n                {{item.quantity}}\n                <a href=\"#\" (click)=\"addQuantity(item,$event)\">\n                  <i class=\"fa fa-plus\"></i>\n                </a>\n              </p>\n            </li>\n            <li class=\"list-group-item\">\n              <a href=\"#\" (click)=\"removeItem(item, $event)\">\n                <span class=\"badge badge-primary badge-pill\">remove item</span>\n              </a>\n            </li>\n          </ul>\n        </div>\n      </li>\n    </ul>\n\n    <div class=\"center-block\">\n      <button class=\"btn btn-outline-danger my-3 mx-2\" (click)=\"removeAll()\">Clear Cart</button>\n      <h5 class=\"text-center my-3\">TOTAL: {{total | currency}}</h5>\n      <button class=\"btn btn-lg btn-success btn-block my-3 mx-2\" (click)=\"placeOrder()\">PLACE ORDER</button>\n    </div>\n\n  </div>\n</div>"
+module.exports = "<div class=\"row\">\n  <div class=\"alert {{className}} fixed-top\">{{msg}}</div>\n  <div class=\"container\" *ngIf=\"cart === null || cart.length === 0;\">\n    <h5 class=\"text-center my-3\">No Items in cart</h5>\n  </div>\n  <div class=\"container\" *ngIf=\"cart.length > 0;\">\n    <ul class=\"list-unstyled mt-5 mx-3 bg-light\" *ngFor=\"let item of cart\">\n      <li class=\"media\">\n        <img class=\"mr-3\" src=\"{{item.product.imageUrl}}\" style=\"max-width: 13rem;\">\n        <div class=\"media-body\">\n          <h5 class=\"my-3 \">Price:\n            <span class=\"text-success\">{{item.product.price | currency}}</span>\n          </h5>\n          <p class=\"card-text\">{{item.product.description}}</p>\n          <ul class=\"list-group list-group-flush\">\n            <li class=\"list-group-item\">Made By:\n              <a href=\"#\" class=\"card-link\">{{item.product.brand}}</a>\n            </li>\n            <li class=\"list-group-item\">Category :\n              <a href=\"#\" class=\"card-link\">{{item.product.category}}</a>\n            </li>\n            <li class=\"list-group-item\">\n              Quantity:\n              <p>\n                <a href=\"#\" (click)=\"minusQuantity(item,$event)\">\n                  <i class=\"fa fa-minus\"></i>\n                </a>\n                {{item.quantity}}\n                <a href=\"#\" (click)=\"addQuantity(item,$event)\">\n                  <i class=\"fa fa-plus\"></i>\n                </a>\n              </p>\n            </li>\n            <li class=\"list-group-item\">\n              <a href=\"#\" (click)=\"removeItem(item, $event)\">\n                <span class=\"badge badge-primary badge-pill\">remove item</span>\n              </a>\n            </li>\n          </ul>\n        </div>\n      </li>\n    </ul>\n\n    <div class=\"center-block\">\n      <button class=\"btn btn-outline-danger my-3 mx-2\" (click)=\"removeAll()\">Clear Cart</button>\n      <h5 class=\"text-center my-3\">TOTAL: {{total | currency}}</h5>\n      <button class=\"btn btn-lg btn-success btn-block my-3 mx-2\" (click)=\"placeOrder()\">PLACE ORDER</button>\n    </div>\n\n  </div>\n</div>"
 
 /***/ }),
 
@@ -606,6 +606,7 @@ var CartComponent = /** @class */ (function () {
     }
     CartComponent.prototype.ngOnInit = function () {
         this.total = 0; //start total at zero
+        this.cart = [];
         // get cart items from cart
         this.getCart();
         this.gettotal(this.cart); // get initial total
@@ -623,7 +624,9 @@ var CartComponent = /** @class */ (function () {
         localStorage.setItem('cart', JSON.stringify(this.cart));
     };
     CartComponent.prototype.getCart = function () {
-        this.cart = this.cart = JSON.parse(localStorage.getItem('cart'));
+        if (localStorage.getItem('cart')) {
+            this.cart = this.cart = JSON.parse(localStorage.getItem('cart'));
+        }
     };
     // add quantity
     CartComponent.prototype.addQuantity = function (cart, e) {
