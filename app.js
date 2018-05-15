@@ -19,8 +19,6 @@ const app = express();
 
 mongoose.connect(config.database);
 
-
-
 // On connect
 mongoose.connection.on('connected', () => {;
   console.log('Connected to database');
