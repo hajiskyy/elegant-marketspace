@@ -1388,6 +1388,8 @@ module.exports = "<div class=\"container mt-5\">\n  <div class=\"row justify-con
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_products_service__ = __webpack_require__("./src/app/services/products.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__ = __webpack_require__("./node_modules/angular2-flash-messages/module/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1400,23 +1402,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ViewBrandProductsComponent = /** @class */ (function () {
-    function ViewBrandProductsComponent(activated, router, prodServe) {
+    function ViewBrandProductsComponent(activated, router, flash, prodService) {
         this.activated = activated;
         this.router = router;
-        this.prodServe = prodServe;
+        this.flash = flash;
+        this.prodService = prodService;
     }
     ViewBrandProductsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activated.params.subscribe(function (param) {
             _this.param = param.brand;
         });
-        this.prodServe.getProductsByBrand(this.param).subscribe(function (products) {
+        this.prodService.getProductsByBrand(this.param).subscribe(function (products) {
             _this.products = products;
         });
     };
     ViewBrandProductsComponent.prototype.viewProduct = function (id) {
         this.router.navigate(['product', id]);
+    };
+    ViewBrandProductsComponent.prototype.onSortChange = function (event) {
+        var _this = this;
+        if (event.target.value === "") {
+            this.ngOnInit();
+        }
+        else {
+            this.prodService.sortProducts(event.target.value).subscribe(function (products) {
+                _this.products = products;
+            });
+        }
+    };
+    ViewBrandProductsComponent.prototype.addToCart = function (product, e) {
+        e.preventDefault();
+        this.prodService.addToCart(product);
+        this.flash.show('Added to Cart', { cssClass: 'alert-info', timeout: 3000 });
     };
     ViewBrandProductsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
@@ -1426,6 +1446,7 @@ var ViewBrandProductsComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* ActivatedRoute */],
             __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__["FlashMessagesService"],
             __WEBPACK_IMPORTED_MODULE_2__services_products_service__["a" /* ProductsService */]])
     ], ViewBrandProductsComponent);
     return ViewBrandProductsComponent;
