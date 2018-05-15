@@ -37,19 +37,6 @@ router.post('/add', (req, res, next) => {
     }
       
     });
-
-    // if (rating.likes > 0) {
-    //   res.json({ success: true, msg: 'Thanks for the feedback' });
-    // } else {
-      
-    // }
-    // let newRating = new ratings({
-    //   _id: new mongoose.Types.ObjectId(),
-    //   likes: req.body.likes,
-    //   comments: req.body.comments,
-    //   product: req.body.product,
-    //   user: req.body.user
-    // });
   });
 
 router.post('/:product', (req, res, next) => {

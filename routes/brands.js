@@ -20,7 +20,7 @@ router.post('/addbrand', upload.single('file'), (req, res, next) => {
     address: req.body.address,
     phone: req.body.phone,
     url: req.body.url,
-    imgUrl: "https://fierce-dawn-51889.herokuapp.com/image/" + req.file.filename
+    imgUrl: "https://elegante.herokuapp.com/image/" + req.file.filename
   });
   let NewUser = new user({
     _id: new mongoose.Types.ObjectId(),

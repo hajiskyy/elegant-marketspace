@@ -14,7 +14,7 @@ router.post('/addproduct', upload.single('file'), (req, res, next) => {
     category: req.body.category,
     price: req.body.price,
     brand: req.body.brand,
-    imageUrl: "https://fierce-dawn-51889.herokuapp.com/image/" + req.file.filename,
+    imageUrl: "https://elegant.herokuapp.com/image/" + req.file.filename,
     availability: req.body.availability,
     discount: req.body.discount
   });
