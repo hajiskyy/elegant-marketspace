@@ -1162,7 +1162,7 @@ var PagenotfoundComponent = /** @class */ (function () {
 /***/ "./src/app/components/shop/shop.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".zoom{\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.zoom:hover img{\r\n  transform: scale(1.5,1.5);\r\n  -moz-transform: scale(1.5,1.5);\r\n  -webkit-transform: scale(1.5,1.5);\r\n}\r\n.zoom img{\r\n  transition: all 0.3s;\r\n  -moz-transition: all 0.3s;\r\n  -webkit-transition: all 0.3s;\r\n}"
+module.exports = ".zoom{\r\n  position: relative;\r\n  overflow: hidden;\r\n}\r\n.zoom:hover img{\r\n  transform: scale(1.2,1.2);\r\n  -moz-transform: scale(1.2,1.2);\r\n  -webkit-transform: scale(1.2,1.2);\r\n}\r\n.zoom img{\r\n  transition: all 0.3s;\r\n  -moz-transition: all 0.3s;\r\n  -webkit-transition: all 0.3s;\r\n}"
 
 /***/ }),
 
