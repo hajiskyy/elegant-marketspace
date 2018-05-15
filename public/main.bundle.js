@@ -371,7 +371,7 @@ module.exports = ""
 /***/ "./src/app/components/brands/brands.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!brands\">\n  <h3 class=\"text-center my-3\">No Brand Available</h3>\n</div>\n<div class=\"container\" *ngIf=\"brands\">\n  <h3 class=\"text-center my-3\">Brands</h3>\n  <div class=\"row\">\n    <div class=\"card-deck\" *ngFor=\"let brand of brands\">\n      <div class=\"card mx-4 mb-3\" style=\"width: 16rem;\">\n        <img src=\"{{brand.imgUrl}}\" alt=\"\" class=\"card-img-top\">\n        <div class=\"card-body\">\n          <h5 class=\"card-title text-primary\">{{brand.brandName}}</h5>\n          <a href=\"#\" (click)=\"brandStore(brand.brandName, $event)\">Go to Store >></a>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div *ngIf=\"!brands\">\n  <h3 class=\"text-center my-3\">No Brand Available</h3>\n</div>\n<div class=\"container\" *ngIf=\"brands\">\n  <h3 class=\"text-center my-3\">Brands</h3>\n  <div class=\"row justify-content-center\">\n    <div class=\"card-deck\" *ngFor=\"let brand of brands\">\n      <div class=\"card mx-4 mb-3\" style=\"width: 16rem;\">\n        <img src=\"{{brand.imgUrl}}\" alt=\"\" class=\"card-img-top\">\n        <div class=\"card-body\">\n          <h5 class=\"card-title text-primary\">{{brand.brandName}}</h5>\n          <a href=\"#\" (click)=\"brandStore(brand.brandName, $event)\">Go to Store >></a>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
