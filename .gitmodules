@@ -1,0 +1,3 @@
+[submodule "ace-elegante-frontend"]
+	path = ace-elegante-frontend
+	url = https://github.com/hajiskyy/ace-elegante-frontend
